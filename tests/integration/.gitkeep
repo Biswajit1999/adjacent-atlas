@@ -1,0 +1,1 @@
+# Integration tests spanning the snapshot pipeline (fetch -> build -> validate) live here.

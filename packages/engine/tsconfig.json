@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "incremental": false,
+    "outDir": "dist",
+    "rootDir": "src",
+    // The layout kernels in src/graph/layout.ts index dense typed arrays in
+    // tight loops. Indexed-access undefined checks add no safety there and
+    // would force pervasive non-null assertions, so they are relaxed for this
+    // package only. All other strictness from the base config is retained.
+    "noUncheckedIndexedAccess": false
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules", "**/*.test.ts"]
+}

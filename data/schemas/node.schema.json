@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adjacent-atlas.dev/schemas/node.schema.json",
+  "title": "AtlasNode",
+  "description": "A vertex in the Adjacent Atlas graph.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label", "kind", "summary", "tags", "signals"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": ["concept", "method", "instrument", "dataset", "repo", "paper"]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "signals": { "$ref": "#/$defs/signals" }
+  },
+  "$defs": {
+    "signals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["activity", "lastActiveAt", "implementations", "maturityYears"],
+      "properties": {
+        "activity": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/signalPoint" }
+        },
+        "lastActiveAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "implementations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maturityYears": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "signalPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["period", "value"],
+      "properties": {
+        "period": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

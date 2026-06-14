@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+.next/
+out/
+*.tsbuildinfo
+
+# Test output
+coverage/
+
+# Turbo
+.turbo/
+
+# Generated data artifacts (kept out of VCS by default; commit deliberately)
+data/snapshots/*.json
+data/briefs/*.json
+!data/snapshots/.gitkeep
+!data/briefs/.gitkeep
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
+
+# Local AI assistant/project notes
+CLAUDE.md
+.claude/
+*.zip

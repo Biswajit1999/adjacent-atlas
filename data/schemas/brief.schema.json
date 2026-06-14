@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adjacent-atlas.dev/schemas/brief.schema.json",
+  "title": "Brief",
+  "description": "A short synthesised write-up for a single node.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "nodeId", "title", "thesis", "signals", "adjacency", "generatedAt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "nodeId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "thesis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signals": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "adjacency": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "laser-frequency-comb",
+    "label": "Laser Frequency Comb",
+    "kind": "instrument",
+    "summary": "A phase-stabilised comb of equally spaced optical frequencies that acts as an absolute wavelength ruler for spectrograph calibration, removing reliance on emission-lamp lines.",
+    "tags": ["calibration", "wavelength-reference", "photonics"],
+    "signals": {
+      "activity": [
+        { "period": "2025-09", "value": 6 },
+        { "period": "2025-10", "value": 7 },
+        { "period": "2025-11", "value": 5 },
+        { "period": "2025-12", "value": 9 },
+        { "period": "2026-01", "value": 11 },
+        { "period": "2026-02", "value": 13 }
+      ],
+      "lastActiveAt": "2026-02-20",
+      "implementations": 6,
+      "maturityYears": 15
+    }
+  },
+  {
+    "id": "fabry-perot-etalon",
+    "label": "Fabry-Perot Etalon",
+    "kind": "instrument",
+    "summary": "A passive interferometric calibrator that imprints a dense, stable comb-like set of transmission peaks, used as a lower-cost wavelength reference alongside or in place of a laser comb.",
+    "tags": ["calibration", "wavelength-reference", "interferometry"],
+    "signals": {
+      "activity": [
+        { "period": "2025-09", "value": 4 },
+        { "period": "2025-10", "value": 5 },
+        { "period": "2025-11", "value": 4 },
+        { "period": "2025-12", "value": 6 },
+        { "period": "2026-01", "value": 7 },
+        { "period": "2026-02", "value": 8 }
+      ],
+      "lastActiveAt": "2026-02-12",
+      "implementations": 9,
+      "maturityYears": 12
+    }
+  },
+  {
+    "id": "fiber-scrambling",
+    "label": "Fiber Scrambling",
+    "kind": "method",
+    "summary": "Optical and mechanical techniques that homogenise the near- and far-field light distribution from a fiber feed, suppressing modal-noise and guiding-error signals that masquerade as radial-velocity shifts.",
+    "tags": ["fiber-feed", "modal-noise", "stability"],
+    "signals": {
+      "activity": [
+        { "period": "2025-09", "value": 3 },
+        { "period": "2025-10", "value": 3 },
+        { "period": "2025-11", "value": 4 },
+        { "period": "2025-12", "value": 4 },
+        { "period": "2026-01", "value": 6 },
+        { "period": "2026-02", "value": 7 }
+      ],
+      "lastActiveAt": "2026-02-08",
+      "implementations": 7,
+      "maturityYears": 10
+    }
+  },
+  {
+    "id": "thermomechanical-stabilization",
+    "label": "Thermomechanical Stabilization",
+    "kind": "method",
+    "summary": "Vacuum enclosure, multi-stage thermal control, and pressure regulation that hold the spectrograph optical bench stable to the level required for sub-metre-per-second velocity precision.",
+    "tags": ["environmental-control", "vacuum", "thermal", "stability"],
+    "signals": {
+      "activity": [
+        { "period": "2025-09", "value": 5 },
+        { "period": "2025-10", "value": 6 },
+        { "period": "2025-11", "value": 6 },
+        { "period": "2025-12", "value": 7 },
+        { "period": "2026-01", "value": 8 },
+        { "period": "2026-02", "value": 9 }
+      ],
+      "lastActiveAt": "2026-02-18",
+      "implementations": 8,
+      "maturityYears": 18
+    }
+  },
+  {
+    "id": "telluric-correction",
+    "label": "Telluric Correction",
+    "kind": "method",
+    "summary": "Modelling and removing Earth-atmosphere absorption features from stellar spectra so that contaminated wavelength regions can be recovered for radial-velocity measurement.",
+    "tags": ["data-reduction", "atmosphere", "systematics"],
+    "signals": {
+      "activity": [
+        { "period": "2025-09", "value": 7 },
+        { "period": "2025-10", "value": 8 },
+        { "period": "2025-11", "value": 9 },
+        { "period": "2025-12", "value": 10 },
+        { "period": "2026-01", "value": 12 },
+        { "period": "2026-02", "value": 14 }
+      ],
+      "lastActiveAt": "2026-02-25",
+      "implementations": 5,
+      "maturityYears": 9
+    }
+  },
+  {
+    "id": "stellar-activity-mitigation",
+    "label": "Stellar Activity Mitigation",
+    "kind": "method",
+    "summary": "Statistical and physical techniques that separate apparent velocity signals caused by stellar surface activity (spots, plage, granulation) from genuine planetary reflex motion.",
+    "tags": ["systematics", "stellar-jitter", "time-series"],
+    "signals": {
+      "activity": [
+        { "period": "2025-09", "value": 9 },
+        { "period": "2025-10", "value": 11 },
+        { "period": "2025-11", "value": 12 },
+        { "period": "2025-12", "value": 14 },
+        { "period": "2026-01", "value": 17 },
+        { "period": "2026-02", "value": 20 }
+      ],
+      "lastActiveAt": "2026-02-27",
+      "implementations": 4,
+      "maturityYears": 8
+    }
+  },
+  {
+    "id": "chromatic-rv-index",
+    "label": "Chromatic RV Index",
+    "kind": "concept",
+    "summary": "A diagnostic that measures the wavelength dependence of a radial-velocity signal; activity-driven signals are typically chromatic while planetary signals are achromatic, giving a discriminator between the two.",
+    "tags": ["diagnostic", "stellar-jitter", "wavelength-dependence"],
+    "signals": {
+      "activity": [
+        { "period": "2025-09", "value": 2 },
+        { "period": "2025-10", "value": 3 },
+        { "period": "2025-11", "value": 3 },
+        { "period": "2025-12", "value": 5 },
+        { "period": "2026-01", "value": 6 },
+        { "period": "2026-02", "value": 8 }
+      ],
+      "lastActiveAt": "2026-02-22",
+      "implementations": 3,
+      "maturityYears": 5
+    }
+  }
+]

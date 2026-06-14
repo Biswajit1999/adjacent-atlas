@@ -1,0 +1,44 @@
+[
+  {
+    "id": "e-comb-etalon",
+    "source": "laser-frequency-comb",
+    "target": "fabry-perot-etalon",
+    "kind": "relates",
+    "weight": 0.6
+  },
+  {
+    "id": "e-comb-thermo",
+    "source": "laser-frequency-comb",
+    "target": "thermomechanical-stabilization",
+    "kind": "depends",
+    "weight": 0.7
+  },
+  {
+    "id": "e-etalon-thermo",
+    "source": "fabry-perot-etalon",
+    "target": "thermomechanical-stabilization",
+    "kind": "depends",
+    "weight": 0.8
+  },
+  {
+    "id": "e-fiber-thermo",
+    "source": "fiber-scrambling",
+    "target": "thermomechanical-stabilization",
+    "kind": "relates",
+    "weight": 0.5
+  },
+  {
+    "id": "e-chroma-activity",
+    "source": "chromatic-rv-index",
+    "target": "stellar-activity-mitigation",
+    "kind": "implements",
+    "weight": 0.65
+  },
+  {
+    "id": "e-telluric-activity",
+    "source": "telluric-correction",
+    "target": "stellar-activity-mitigation",
+    "kind": "relates",
+    "weight": 0.4
+  }
+]

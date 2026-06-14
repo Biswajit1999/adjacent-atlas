@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use Adjacent Atlas in your work, please cite it as below."
+title: "Adjacent Atlas"
+abstract: >-
+  A pipeline and interface for mapping the adjacent possible in a research
+  field from public code and literature signals.
+type: software
+authors:
+  - family-names: Jana
+    given-names: Biswajit
+    alias: biswajitj998
+version: 0.1.0
+date-released: "2026-06-14"
+license: MIT
+repository-code: "https://github.com/biswajitj998/adjacent-atlas"
+url: "https://github.com/biswajitj998/adjacent-atlas"
+keywords:
+  - research-mapping
+  - adjacent-possible
+  - scientometrics
+  - knowledge-graph
+  - eprv

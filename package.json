@@ -1,0 +1,39 @@
+{
+  "name": "adjacent-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Maps the adjacent possible in a research field from public code and literature signals.",
+  "license": "MIT",
+  "author": "Biswajit Jana (@biswajitj998)",
+  "homepage": "https://github.com/biswajitj998/adjacent-atlas#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biswajitj998/adjacent-atlas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/biswajitj998/adjacent-atlas/issues"
+  },
+  "packageManager": "pnpm@9.6.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "snapshot": "tsx scripts/build-snapshot.ts",
+    "snapshot:validate": "tsx scripts/validate-snapshot.ts",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,yml,yaml}\""
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "prettier": "^3.3.2",
+    "rimraf": "^5.0.7",
+    "tsx": "^4.16.2",
+    "turbo": "^2.0.6",
+    "typescript": "^5.5.3"
+  }
+}

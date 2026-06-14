@@ -1,0 +1,2 @@
+# Engine unit tests are colocated with their source (packages/**/src/**/*.test.ts).
+# Cross-package unit tests that do not belong to a single package live here.

@@ -1,0 +1,9 @@
+# Code owners for Adjacent Atlas.
+# These owners are requested for review on any matching pull request.
+
+# Default owner for everything in the repository.
+*                       @biswajitj998
+
+# Engine and data contracts require owner review.
+/packages/engine/       @biswajitj998
+/data/schemas/          @biswajitj998

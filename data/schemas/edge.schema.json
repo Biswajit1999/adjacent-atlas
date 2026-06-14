@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adjacent-atlas.dev/schemas/edge.schema.json",
+  "title": "AtlasEdge",
+  "description": "A directed, weighted relationship between two nodes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "source", "target", "kind", "weight"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "source": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "target": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "kind": {
+      "enum": ["relates", "depends", "cites", "implements", "supersedes"]
+    },
+    "weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  }
+}

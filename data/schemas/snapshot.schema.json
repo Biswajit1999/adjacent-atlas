@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adjacent-atlas.dev/schemas/snapshot.schema.json",
+  "title": "AtlasSnapshot",
+  "description": "A scored, serialisable view of the atlas at a point in time.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "nodes", "edges", "scores"],
+  "properties": {
+    "meta": { "$ref": "#/$defs/meta" },
+    "nodes": {
+      "type": "array",
+      "items": { "$ref": "node.schema.json" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "edge.schema.json" }
+    },
+    "scores": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nodeScore" }
+    }
+  },
+  "$defs": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "generatedAt",
+        "domain",
+        "sourceWindow",
+        "nodeCount",
+        "edgeCount",
+        "engineVersion"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "domain": { "type": "string", "minLength": 1 },
+        "sourceWindow": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["from", "to"],
+          "properties": {
+            "from": { "type": "string", "format": "date" },
+            "to": { "type": "string", "format": "date" }
+          }
+        },
+        "nodeCount": { "type": "integer", "minimum": 0 },
+        "edgeCount": { "type": "integer", "minimum": 0 },
+        "engineVersion": { "type": "string", "minLength": 1 }
+      }
+    },
+    "scoreBreakdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["momentum", "recency", "connectivity", "novelty", "feasibility"],
+      "properties": {
+        "momentum": { "type": "number", "minimum": 0, "maximum": 1 },
+        "recency": { "type": "number", "minimum": 0, "maximum": 1 },
+        "connectivity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "novelty": { "type": "number", "minimum": 0, "maximum": 1 },
+        "feasibility": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "nodeScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "adjacency", "breakdown"],
+      "properties": {
+        "nodeId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "adjacency": { "type": "number", "minimum": 0, "maximum": 100 },
+        "breakdown": { "$ref": "#/$defs/scoreBreakdown" }
+      }
+    }
+  }
+}
