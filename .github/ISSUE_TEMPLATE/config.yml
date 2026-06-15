@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security report
-    url: https://github.com/biswajitj998/adjacent-atlas/security/advisories/new
+    url: https://github.com/Biswajit1999/adjacent-atlas/security/advisories/new
     about: Report a security vulnerability privately. Do not open a public issue.
   - name: Question or discussion
-    url: https://github.com/biswajitj998/adjacent-atlas/discussions
+    url: https://github.com/Biswajit1999/adjacent-atlas/discussions
     about: Ask a question or discuss an idea before filing an issue.

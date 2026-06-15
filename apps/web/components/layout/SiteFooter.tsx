@@ -7,7 +7,7 @@ export function SiteFooter(): JSX.Element {
           © {year} Biswajit Jana · MIT License
         </span>
         <nav className="site-footer__links" aria-label="Footer">
-          <a href="https://github.com/biswajitj998/adjacent-atlas">Repository</a>
+          <a href="https://github.com/Biswajit1999/adjacent-atlas">Repository</a>
           <a href="/method">Method</a>
           <a href="/api/snapshot">Snapshot API</a>
         </nav>

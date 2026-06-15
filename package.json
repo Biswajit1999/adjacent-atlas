@@ -4,14 +4,14 @@
   "private": true,
   "description": "Maps the adjacent possible in a research field from public code and literature signals.",
   "license": "MIT",
-  "author": "Biswajit Jana (@biswajitj998)",
-  "homepage": "https://github.com/biswajitj998/adjacent-atlas#readme",
+  "author": "Biswajit Jana (@Biswajit1999)",
+  "homepage": "https://github.com/Biswajit1999/adjacent-atlas#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/biswajitj998/adjacent-atlas.git"
+    "url": "git+https://github.com/Biswajit1999/adjacent-atlas.git"
   },
   "bugs": {
-    "url": "https://github.com/biswajitj998/adjacent-atlas/issues"
+    "url": "https://github.com/Biswajit1999/adjacent-atlas/issues"
   },
   "packageManager": "pnpm@9.6.0",
   "engines": {
@@ -26,6 +26,10 @@
     "clean": "turbo run clean",
     "snapshot": "tsx scripts/build-snapshot.ts",
     "snapshot:validate": "tsx scripts/validate-snapshot.ts",
+    "social-card": "tsx scripts/export-social-card.ts",
+    "ingest:github": "tsx scripts/fetch-github.ts",
+    "ingest:papers": "tsx scripts/fetch-papers.ts",
+    "ingest:normalise": "tsx scripts/source-normalise.ts",
     "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,yml,yaml}\""
   },
   "devDependencies": {

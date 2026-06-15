@@ -4,11 +4,11 @@ export const SITE = {
   description:
     "Methods, instruments, and concepts close to the frontier of a research field, ranked from public code and literature signals.",
   domain: "extreme-precision radial velocity instrumentation",
-  repoUrl: "https://github.com/biswajitj998/adjacent-atlas",
+  repoUrl: "https://github.com/Biswajit1999/adjacent-atlas",
   author: {
     name: "Biswajit Jana",
-    handle: "biswajitj998",
-    url: "https://github.com/biswajitj998",
+    handle: "Biswajit1999",
+    url: "https://github.com/Biswajit1999",
   },
   year: 2026,
 } as const;

@@ -1,14 +1,18 @@
 /**
- * Build a scored snapshot (and top briefs) from the seed graph.
+ * Build a scored snapshot (and top briefs).
  *
- * Run from the repository root:
  *   pnpm snapshot
+ *
+ * Source selection:
+ *   - If data/raw/normalised.json exists (produced by the ingestion pipeline),
+ *     it is used and the snapshot reflects real public signals.
+ *   - Otherwise the labelled seed graph in data/seeds is used.
  *
  * Output:
  *   data/snapshots/<id>.json
  *   data/briefs/<id>.briefs.json
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -22,7 +26,7 @@ import {
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, "..");
-const DOMAIN = "extreme-precision radial velocity instrumentation";
+const DEFAULT_DOMAIN = "extreme-precision radial velocity instrumentation";
 
 function readJson<T>(relativePath: string): T {
   return JSON.parse(readFileSync(resolve(ROOT, relativePath), "utf8")) as T;
@@ -33,34 +37,60 @@ function yyyymmdd(date: Date): string {
 }
 
 function sourceWindow(nodes: AtlasNode[]): { from: string; to: string } {
-  const periods = nodes
-    .flatMap((n) => n.signals.activity.map((p) => p.period))
-    .sort();
+  const periods = nodes.flatMap((n) => n.signals.activity.map((p) => p.period)).sort();
   const from = periods.at(0) ?? "1970-01";
   const to = periods.at(-1) ?? from;
   return { from: `${from}-01`, to: `${to}-28` };
 }
 
-function main(): void {
-  const nodes = readJson<AtlasNode[]>("data/seeds/concepts.seed.json");
-  const edges = readJson<AtlasEdge[]>("data/seeds/edges.seed.json");
+interface Graph {
+  nodes: AtlasNode[];
+  edges: AtlasEdge[];
+  domain: string;
+  source: string;
+  ingested: boolean;
+}
 
-  const edgeProblems = validateEdges(nodes, edges);
+function loadGraph(): Graph {
+  const normalisedPath = resolve(ROOT, "data/raw/normalised.json");
+  if (existsSync(normalisedPath)) {
+    const data = readJson<{ nodes: AtlasNode[]; edges: AtlasEdge[]; domain?: string }>("data/raw/normalised.json");
+    return {
+      nodes: data.nodes,
+      edges: data.edges,
+      domain: data.domain ?? DEFAULT_DOMAIN,
+      source: "ingested public signals (data/raw/normalised.json)",
+      ingested: true,
+    };
+  }
+  return {
+    nodes: readJson<AtlasNode[]>("data/seeds/concepts.seed.json"),
+    edges: readJson<AtlasEdge[]>("data/seeds/edges.seed.json"),
+    domain: DEFAULT_DOMAIN,
+    source: "seed graph (data/seeds — illustrative)",
+    ingested: false,
+  };
+}
+
+function main(): void {
+  const graph = loadGraph();
+
+  const edgeProblems = validateEdges(graph.nodes, graph.edges);
   if (edgeProblems.length > 0) {
-    console.error("Seed graph is invalid:");
+    console.error("Graph is invalid:");
     for (const p of edgeProblems) console.error(`  - ${p}`);
     process.exit(1);
   }
 
   const generatedAt = new Date();
-  const id = `eprv-${yyyymmdd(generatedAt)}`;
+  const id = `${graph.ingested ? "eprv" : "eprv-seed"}-${yyyymmdd(generatedAt)}`;
 
   const snapshot = buildSnapshot({
     id,
-    domain: DOMAIN,
-    nodes,
-    edges,
-    sourceWindow: sourceWindow(nodes),
+    domain: graph.domain,
+    nodes: graph.nodes,
+    edges: graph.edges,
+    sourceWindow: sourceWindow(graph.nodes),
     generatedAt,
   });
 
@@ -70,14 +100,13 @@ function main(): void {
 
   mkdirSync(resolve(ROOT, "data/snapshots"), { recursive: true });
   mkdirSync(resolve(ROOT, "data/briefs"), { recursive: true });
-
   const snapshotPath = resolve(ROOT, `data/snapshots/${id}.json`);
   const briefsPath = resolve(ROOT, `data/briefs/${id}.briefs.json`);
-
   writeFileSync(snapshotPath, serializeSnapshot(snapshot));
   writeFileSync(briefsPath, `${JSON.stringify(topBriefs, null, 2)}\n`);
 
   const ranked = [...snapshot.scores].sort((a, b) => b.adjacency - a.adjacency);
+  console.log(`Source: ${graph.source}`);
   console.log(`Snapshot ${id}: ${snapshot.nodes.length} nodes, ${snapshot.edges.length} edges`);
   console.log("Top by adjacency:");
   for (const s of ranked.slice(0, 5)) {

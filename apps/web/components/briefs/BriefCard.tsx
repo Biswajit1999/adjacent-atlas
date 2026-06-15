@@ -9,7 +9,7 @@ export function BriefCard({ brief }: BriefCardProps): JSX.Element {
     <article className="brief">
       <div className="brief__head">
         <h3 className="brief__title">
-          <a href={`/atlas#${brief.nodeId}`}>{brief.title}</a>
+          <a href={`/briefs/${brief.id}`}>{brief.title}</a>
         </h3>
         <span className="brief__adjacency">{brief.adjacency.toFixed(1)}</span>
       </div>

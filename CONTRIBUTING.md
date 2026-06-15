@@ -10,7 +10,7 @@ Thanks for your interest in contributing.
 ## Setup
 
 ```bash
-git clone https://github.com/biswajitj998/adjacent-atlas.git
+git clone https://github.com/Biswajit1999/adjacent-atlas.git
 cd adjacent-atlas
 pnpm install
 ```

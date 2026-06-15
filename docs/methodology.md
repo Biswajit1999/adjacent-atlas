@@ -35,3 +35,23 @@ The bundled seed's `signals` values (activity series, implementation counts,
 maturity) are illustrative scaffolding that exercise the model across a realistic
 range. They are not measured statistics. Live snapshots replace them with values
 from the fetch scripts.
+
+
+## Reading the scores honestly
+
+The scoring is a transparent heuristic, and its boundary matters as much as its
+output. The honest limitations — attention versus merit, proxy noise, the
+subjectivity of the weights, and the absence of any predictive claim — are set
+out in [`field-notes/scoring-limitations.md`](./field-notes/scoring-limitations.md).
+
+## Field notes
+
+Authored, researcher-voice context lives alongside this document:
+
+- [Why EPRV instrumentation is the seed domain](./field-notes/eprv-domain-notes.md)
+- [Design decisions](./field-notes/design-decisions.md) and
+  [interface rationale](./field-notes/interface-rationale.md)
+- [Limitations of the scoring](./field-notes/scoring-limitations.md)
+
+These are commentary, not data. The seed's activity numbers are illustrative;
+real snapshots come from the ingestion pipeline (`docs/data-sources.md`).

@@ -1,0 +1,99 @@
+{
+  "domain": "extreme-precision radial velocity instrumentation",
+  "version": 1,
+  "note": "Curated source list for the ingestion pipeline. Each concept carries factual descriptors and a pair of public-API search queries. The fetch scripts run those queries against the GitHub Search API and OpenAlex; all resulting numbers are real. Edges are curated relationships between concepts. maturityYears is a rough human estimate (years since the technique became established in the field) and is labelled as such.",
+  "concepts": [
+    {
+      "id": "laser-frequency-comb",
+      "label": "Laser Frequency Comb",
+      "kind": "instrument",
+      "summary": "A phase-stabilised comb of equally spaced optical frequencies that acts as an absolute wavelength ruler for spectrograph calibration, removing reliance on emission-lamp lines.",
+      "tags": ["calibration", "wavelength-reference", "photonics"],
+      "maturityYears": 15,
+      "queries": {
+        "github": "laser frequency comb astronomy spectrograph calibration",
+        "openalex": "astronomical laser frequency comb spectrograph calibration"
+      }
+    },
+    {
+      "id": "fabry-perot-etalon",
+      "label": "Fabry-Perot Etalon",
+      "kind": "instrument",
+      "summary": "A passive interferometric calibrator that imprints a dense, stable comb-like set of transmission peaks, used as a lower-cost wavelength reference alongside or in place of a laser comb.",
+      "tags": ["calibration", "wavelength-reference", "interferometry"],
+      "maturityYears": 12,
+      "queries": {
+        "github": "fabry perot etalon spectrograph wavelength calibration",
+        "openalex": "Fabry-Perot etalon spectrograph radial velocity calibration"
+      }
+    },
+    {
+      "id": "fiber-scrambling",
+      "label": "Fiber Scrambling",
+      "kind": "method",
+      "summary": "Optical and mechanical techniques that homogenise the near- and far-field light distribution from a fiber feed, suppressing modal-noise and guiding-error signals that masquerade as radial-velocity shifts.",
+      "tags": ["fiber-feed", "modal-noise", "stability"],
+      "maturityYears": 10,
+      "queries": {
+        "github": "optical fiber scrambler spectrograph modal noise",
+        "openalex": "optical fiber scrambling spectrograph modal noise radial velocity"
+      }
+    },
+    {
+      "id": "thermomechanical-stabilization",
+      "label": "Thermomechanical Stabilization",
+      "kind": "method",
+      "summary": "Vacuum enclosure, multi-stage thermal control, and pressure regulation that hold the spectrograph optical bench stable to the level required for sub-metre-per-second velocity precision.",
+      "tags": ["environmental-control", "vacuum", "thermal", "stability"],
+      "maturityYears": 18,
+      "queries": {
+        "github": "spectrograph thermal vacuum stabilization control",
+        "openalex": "spectrograph thermal pressure stabilization radial velocity precision"
+      }
+    },
+    {
+      "id": "telluric-correction",
+      "label": "Telluric Correction",
+      "kind": "method",
+      "summary": "Modelling and removing Earth-atmosphere absorption features from stellar spectra so that contaminated wavelength regions can be recovered for radial-velocity measurement.",
+      "tags": ["data-reduction", "atmosphere", "systematics"],
+      "maturityYears": 9,
+      "queries": {
+        "github": "telluric correction stellar spectra",
+        "openalex": "telluric correction stellar spectra radial velocity"
+      }
+    },
+    {
+      "id": "stellar-activity-mitigation",
+      "label": "Stellar Activity Mitigation",
+      "kind": "method",
+      "summary": "Statistical and physical techniques that separate apparent velocity signals caused by stellar surface activity (spots, plage, granulation) from genuine planetary reflex motion.",
+      "tags": ["systematics", "stellar-jitter", "time-series"],
+      "maturityYears": 8,
+      "queries": {
+        "github": "stellar activity radial velocity",
+        "openalex": "stellar activity mitigation radial velocity exoplanet"
+      }
+    },
+    {
+      "id": "chromatic-rv-index",
+      "label": "Chromatic RV Index",
+      "kind": "concept",
+      "summary": "A diagnostic that measures the wavelength dependence of a radial-velocity signal; activity-driven signals are typically chromatic while planetary signals are achromatic, giving a discriminator between the two.",
+      "tags": ["diagnostic", "stellar-jitter", "wavelength-dependence"],
+      "maturityYears": 5,
+      "queries": {
+        "github": "chromatic radial velocity index",
+        "openalex": "chromatic index radial velocity stellar activity wavelength dependence"
+      }
+    }
+  ],
+  "edges": [
+    { "id": "e-comb-etalon", "source": "laser-frequency-comb", "target": "fabry-perot-etalon", "kind": "relates", "weight": 0.6 },
+    { "id": "e-comb-thermo", "source": "laser-frequency-comb", "target": "thermomechanical-stabilization", "kind": "depends", "weight": 0.7 },
+    { "id": "e-etalon-thermo", "source": "fabry-perot-etalon", "target": "thermomechanical-stabilization", "kind": "depends", "weight": 0.8 },
+    { "id": "e-fiber-thermo", "source": "fiber-scrambling", "target": "thermomechanical-stabilization", "kind": "relates", "weight": 0.5 },
+    { "id": "e-chroma-activity", "source": "chromatic-rv-index", "target": "stellar-activity-mitigation", "kind": "implements", "weight": 0.65 },
+    { "id": "e-telluric-activity", "source": "telluric-correction", "target": "stellar-activity-mitigation", "kind": "relates", "weight": 0.4 }
+  ]
+}

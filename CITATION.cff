@@ -8,12 +8,12 @@ type: software
 authors:
   - family-names: Jana
     given-names: Biswajit
-    alias: biswajitj998
+    alias: Biswajit1999
 version: 0.1.0
 date-released: "2026-06-14"
 license: MIT
-repository-code: "https://github.com/biswajitj998/adjacent-atlas"
-url: "https://github.com/biswajitj998/adjacent-atlas"
+repository-code: "https://github.com/Biswajit1999/adjacent-atlas"
+url: "https://github.com/Biswajit1999/adjacent-atlas"
 keywords:
   - research-mapping
   - adjacent-possible

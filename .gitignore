@@ -19,6 +19,12 @@ data/snapshots/*.json
 data/briefs/*.json
 !data/snapshots/.gitkeep
 !data/briefs/.gitkeep
+# Ingestion pipeline outputs (generated)
+data/raw/*
+!data/raw/.gitkeep
+data/cache/*
+!data/cache/.gitkeep
+
 
 # Environment
 .env
@@ -31,8 +37,3 @@ data/briefs/*.json
 .vscode/*
 !.vscode/extensions.json
 *.log
-
-# Local AI assistant/project notes
-CLAUDE.md
-.claude/
-*.zip

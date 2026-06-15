@@ -45,3 +45,21 @@ are passed through `ScoreOptions`).
 
 It is a heuristic, not a predictor. It encodes a defensible point of view about
 what is worth looking at next; changing the weights changes that view.
+
+
+## Limitations
+
+The score is a useful lens and a blunt instrument. In short:
+
+- It measures **attention, not merit** — a high score is a prompt to look
+  closer, never a verdict.
+- The inputs are **coarse public-signal proxies** (repository and keyword-search
+  counts), not curated bibliometrics, and must not be read as citation counts.
+- The **weights are a point of view**; change them and the ranking changes.
+- The seed **graph is small and authored**, so connectivity is sensitive to a
+  few hand-set edges.
+- There is **no causal or predictive claim** — opportunity means young, moving,
+  and buildable by the proxies above, nothing more.
+
+A fuller version is in
+[`field-notes/scoring-limitations.md`](./field-notes/scoring-limitations.md).

@@ -91,9 +91,19 @@ Real fetch implementations, snapshot history and drift, a Barnes–Hut layout fo
 larger graphs, and additional reference domains. Full list in
 [`docs/roadmap.md`](./docs/roadmap.md).
 
+## Deploying
+
+Adjacent Atlas runs as a Node server (the API routes are dynamic), so it is not a
+static export. Build with `pnpm build` and deploy to Vercel or any Node host; see
+[`docs/deployment.md`](./docs/deployment.md). Integration into another site
+(link, embed, or iframe) is covered in
+[`docs/website-integration.md`](./docs/website-integration.md).
+ Launch materials — repo description, topics, a LinkedIn post, and image briefs — are
+collected in [`docs/launch-pack.md`](./docs/launch-pack.md).
+
 ## Ownership and license
 
-Built and maintained by **Biswajit Jana** ([@biswajitj998](https://github.com/biswajitj998)).
+Built and maintained by **Biswajit Jana** ([@Biswajit1999](https://github.com/Biswajit1999)).
 Released under the MIT License — see [`LICENSE`](./LICENSE). The seed `signals`
 values are illustrative scaffolding, not measured statistics; see
 [`docs/methodology.md`](./docs/methodology.md).

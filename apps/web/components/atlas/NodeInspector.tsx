@@ -1,4 +1,5 @@
 import { ScoreBar, Tag } from "@adjacent-atlas/ui";
+import { opportunityScore } from "@adjacent-atlas/engine";
 import type { AtlasNode, NodeScore } from "@adjacent-atlas/engine";
 import { KIND_VISUALS, SUBSCORE_META, formatDate, formatMonth } from "@/lib/format";
 
@@ -59,6 +60,10 @@ export function NodeInspector({ node, score, onClose }: NodeInspectorProps): JSX
         {SUBSCORE_META.map((meta) => (
           <ScoreBar key={meta.key} value={score.breakdown[meta.key] * 100} label={meta.label} />
         ))}
+      </div>
+
+      <div className="inspector__opportunity">
+        <ScoreBar value={opportunityScore(score.breakdown) * 100} label="opportunity" />
       </div>
 
       <dl className="inspector__facts">
