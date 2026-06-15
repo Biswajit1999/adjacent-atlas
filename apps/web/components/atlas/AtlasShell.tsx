@@ -5,6 +5,9 @@ import type { AtlasSnapshot, NodeScore } from "@adjacent-atlas/engine";
 import { AtlasScene } from "./AtlasScene";
 import { AtlasLegend } from "./AtlasLegend";
 import { AtlasFilters } from "./AtlasFilters";
+import { AtlasTimeline } from "./AtlasTimeline";
+import { GraphStatsPanel } from "./GraphStatsPanel";
+import { OpportunityRadar } from "./OpportunityRadar";
 import { NodeInspector } from "./NodeInspector";
 import { RankedNodeList } from "./RankedNodeList";
 import { LoadingState } from "@/components/shared/LoadingState";
@@ -26,9 +29,14 @@ import {
   DEFAULT_FILTER,
   type FilterState,
 } from "@/lib/filter";
+import { activityTimeline, computeStats, opportunities, searchNodes } from "@/lib/graph-metrics";
 
 export interface AtlasShellProps {
   initialSnapshot: AtlasSnapshot;
+}
+
+function intersect(a: Set<string>, b: Set<string>): Set<string> {
+  return new Set([...a].filter((id) => b.has(id)));
 }
 
 export function AtlasShell({ initialSnapshot }: AtlasShellProps): JSX.Element {
@@ -44,20 +52,33 @@ export function AtlasShell({ initialSnapshot }: AtlasShellProps): JSX.Element {
     return record;
   }, [data]);
 
+  const stats = useMemo(() => computeStats(data), [data]);
+  const opportunityRows = useMemo(() => opportunities(data, 5), [data]);
+  const timeline = useMemo(() => activityTimeline(data.nodes), [data]);
+
   const [filter, setFilter] = useState<FilterState>(DEFAULT_FILTER);
+  const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [positions, setPositions] = useState<LayoutPosition[] | null>(null);
 
-  const filtered = useMemo(() => applyFilter(entries, filter), [entries, filter]);
-  const active = isFilterActive(filter);
-  const visibleIds = useMemo(
-    () => (active ? visibleIdSet(entries, filter) : null),
-    [active, entries, filter],
-  );
+  const searchMatch = useMemo(() => searchNodes(data.nodes, query), [data, query]);
+  const filterActive = isFilterActive(filter);
 
-  // Layout: prefer a worker; fall back to a synchronous pass when workers are
-  // unavailable or fail. The graph is small at seed scale, so the fallback is cheap.
+  // Scene visibility = filter ∩ search (null on either side means "no restriction").
+  const visibleIds = useMemo(() => {
+    const filterIds = filterActive ? visibleIdSet(entries, filter) : null;
+    if (filterIds && searchMatch) return intersect(filterIds, searchMatch);
+    return filterIds ?? searchMatch;
+  }, [entries, filter, filterActive, searchMatch]);
+
+  // Ranked list = filter then search.
+  const listEntries = useMemo(() => {
+    let list = applyFilter(entries, filter);
+    if (searchMatch) list = list.filter((e) => searchMatch.has(e.node.id));
+    return list;
+  }, [entries, filter, searchMatch]);
+
   useEffect(() => {
     let cancelled = false;
     setPositions(null);
@@ -74,9 +95,7 @@ export function AtlasShell({ initialSnapshot }: AtlasShellProps): JSX.Element {
     let worker: Worker | null = null;
     try {
       if (typeof window !== "undefined" && typeof Worker !== "undefined") {
-        worker = new Worker(new URL("../../workers/layout.worker.ts", import.meta.url), {
-          type: "module",
-        });
+        worker = new Worker(new URL("../../workers/layout.worker.ts", import.meta.url), { type: "module" });
         worker.onmessage = (event: MessageEvent<LayoutWorkerOutput>) => {
           if (cancelled) return;
           const message = event.data;
@@ -103,12 +122,8 @@ export function AtlasShell({ initialSnapshot }: AtlasShellProps): JSX.Element {
     };
   }, [data]);
 
-  const selectedEntry = selectedId
-    ? entries.find((entry) => entry.node.id === selectedId) ?? null
-    : null;
-  const hoveredLabel = hoveredId
-    ? data.nodes.find((node) => node.id === hoveredId)?.label ?? null
-    : null;
+  const selectedEntry = selectedId ? entries.find((e) => e.node.id === selectedId) ?? null : null;
+  const hoveredLabel = hoveredId ? data.nodes.find((n) => n.id === hoveredId)?.label ?? null : null;
 
   if (status === "error" && !snapshot) {
     return <ErrorState message={error ?? "Could not load the snapshot."} onRetry={reload} />;
@@ -135,31 +150,48 @@ export function AtlasShell({ initialSnapshot }: AtlasShellProps): JSX.Element {
         </div>
         {selectedEntry ? (
           <div className="atlas__inspector">
-            <NodeInspector
-              node={selectedEntry.node}
-              score={selectedEntry.score}
-              onClose={() => setSelectedId(null)}
-            />
+            <NodeInspector node={selectedEntry.node} score={selectedEntry.score} onClose={() => setSelectedId(null)} />
           </div>
         ) : null}
       </div>
 
       <aside className="atlas__side">
+        <div className="panel-block">
+          <label className="search">
+            <span className="visually-hidden">Search nodes</span>
+            <input
+              type="search"
+              className="search__input"
+              placeholder="Search label or tag…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </label>
+          {searchMatch ? (
+            <p className="panel-block__hint">{searchMatch.size} match{searchMatch.size === 1 ? "" : "es"}</p>
+          ) : null}
+        </div>
         <AtlasFilters kinds={kinds} tags={tags} filter={filter} onChange={setFilter} />
         <AtlasLegend kinds={kinds} />
+        <GraphStatsPanel stats={stats} />
+        <OpportunityRadar rows={opportunityRows} selectedId={selectedId} onSelect={setSelectedId} />
       </aside>
+
+      <div className="atlas__timeline">
+        <AtlasTimeline points={timeline} />
+      </div>
 
       <div className="atlas__list">
         <div className="atlas__list-head">
           <h2 className="atlas__list-title">Ranked nodes</h2>
           <span className="muted">
-            {filtered.length} of {entries.length}
+            {listEntries.length} of {entries.length}
           </span>
         </div>
         {status === "loading" && !snapshot ? (
           <LoadingState message="Loading snapshot…" />
         ) : (
-          <RankedNodeList entries={filtered} selectedId={selectedId} onSelect={setSelectedId} />
+          <RankedNodeList entries={listEntries} selectedId={selectedId} onSelect={setSelectedId} />
         )}
       </div>
     </div>

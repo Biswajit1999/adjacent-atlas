@@ -1,6 +1,15 @@
 import { describe, expect, it } from "vitest";
 import type { AtlasSnapshot } from "@adjacent-atlas/engine";
-import { applyFilter, collectKinds, collectTags, matchesFilter, rankEntries } from "./filter";
+import {
+  applyFilter,
+  collectKinds,
+  collectTags,
+  isFilterActive,
+  matchesFilter,
+  rankEntries,
+  visibleIdSet,
+  DEFAULT_FILTER,
+} from "./filter";
 
 const snapshot: AtlasSnapshot = {
   meta: {
@@ -61,5 +70,25 @@ describe("applyFilter", () => {
     const entry = entries[0]!;
     expect(matchesFilter(entry, { kinds: ["method"], minScore: 75, tag: "x" })).toBe(true);
     expect(matchesFilter(entry, { kinds: ["instrument"], minScore: 0, tag: null })).toBe(false);
+  });
+});
+
+
+describe("visibleIdSet", () => {
+  const entries = rankEntries(snapshot);
+  it("returns the ids passing a filter", () => {
+    const ids = visibleIdSet(entries, { kinds: ["method"], minScore: 0, tag: null });
+    expect(ids).toEqual(new Set(["a", "c"]));
+  });
+});
+
+describe("isFilterActive", () => {
+  it("is false for the default filter", () => {
+    expect(isFilterActive(DEFAULT_FILTER)).toBe(false);
+  });
+  it("is true when any criterion is set", () => {
+    expect(isFilterActive({ kinds: ["method"], minScore: 0, tag: null })).toBe(true);
+    expect(isFilterActive({ kinds: [], minScore: 50, tag: null })).toBe(true);
+    expect(isFilterActive({ kinds: [], minScore: 0, tag: "x" })).toBe(true);
   });
 });

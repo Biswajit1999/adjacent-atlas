@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getBriefs, getSnapshot } from "@/lib/snapshot";
 import { BriefGrid } from "@/components/briefs/BriefGrid";
+import { generalFieldNotes } from "@/content/field-notes";
 
 export const metadata: Metadata = {
   title: "Briefs",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function BriefsPage(): JSX.Element {
   const snapshot = getSnapshot();
   const briefs = getBriefs();
+  const notes = generalFieldNotes();
 
   return (
     <section className="page container">
@@ -24,6 +26,20 @@ export default function BriefsPage(): JSX.Element {
       </header>
 
       <BriefGrid briefs={briefs} />
+
+      {notes.length > 0 ? (
+        <section className="field-notes-section">
+          <h2 className="field-notes-section__title">Field notes</h2>
+          <div className="field-notes">
+            {notes.map((n) => (
+              <article className="field-note" key={n.id}>
+                <h3>{n.title}</h3>
+                <p>{n.body[0]}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <p className="note">
         Briefs follow snapshot <span className="mono">{snapshot.meta.id}</span>. They are

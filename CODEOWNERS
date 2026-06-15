@@ -2,8 +2,8 @@
 # These owners are requested for review on any matching pull request.
 
 # Default owner for everything in the repository.
-*                       @biswajitj998
+*                       @Biswajit1999
 
 # Engine and data contracts require owner review.
-/packages/engine/       @biswajitj998
-/data/schemas/          @biswajitj998
+/packages/engine/       @Biswajit1999
+/data/schemas/          @Biswajit1999

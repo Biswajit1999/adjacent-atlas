@@ -84,6 +84,7 @@ interface SceneState {
   hoveredId: string | null;
   raf: number;
   autoRotate: boolean;
+  reducedMotion: boolean;
 }
 
 function makeHaloTexture(): THREE.Texture {
@@ -340,6 +341,11 @@ export function AtlasScene(props: AtlasSceneProps): JSX.Element {
     group.add(selectSprite);
     group.add(hoverSprite);
 
+    const prefersReducedMotion =
+      typeof window !== "undefined" && typeof window.matchMedia === "function"
+        ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        : false;
+
     const state: SceneState = {
       renderer,
       scene,
@@ -367,7 +373,8 @@ export function AtlasScene(props: AtlasSceneProps): JSX.Element {
       moved: 0,
       hoveredId: null,
       raf: 0,
-      autoRotate: propsRef.current.autoRotate ?? true,
+      autoRotate: (propsRef.current.autoRotate ?? true) && !prefersReducedMotion,
+      reducedMotion: prefersReducedMotion,
     };
     stateRef.current = state;
 
@@ -446,6 +453,16 @@ export function AtlasScene(props: AtlasSceneProps): JSX.Element {
       { passive: false, signal },
     );
 
+    // Keep the WebGL context recoverable instead of letting the browser drop it
+    // permanently; preventing the default on contextlost allows restoration.
+    dom.addEventListener(
+      "webglcontextlost",
+      (e) => {
+        e.preventDefault();
+      },
+      { signal },
+    );
+
     const resizeObserver = new ResizeObserver(() => {
       const w = container.clientWidth || 640;
       const h = propsRef.current.height ?? 520;
@@ -475,7 +492,7 @@ export function AtlasScene(props: AtlasSceneProps): JSX.Element {
         }
       }
 
-      if (state.selectSprite.visible) {
+      if (state.selectSprite.visible && !state.reducedMotion) {
         const t = state.clock.getElapsedTime();
         const s = 13 + Math.sin(t * 2.2) * 1.4;
         state.selectSprite.scale.set(s, s, 1);

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SkipLink } from "@/components/shared/SkipLink";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
       "Methods, instruments, and concepts close to the frontier of a research field, ranked from public signals.",
     type: "website",
   },
-  authors: [{ name: "Biswajit Jana", url: "https://github.com/biswajitj998" }],
+  authors: [{ name: "Biswajit Jana", url: "https://github.com/Biswajit1999" }],
 };
 
 export default function RootLayout({
@@ -28,8 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <SkipLink />
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <SiteFooter />
       </body>
     </html>

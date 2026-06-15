@@ -1,0 +1,2 @@
+# HTTP response cache for the ingestion pipeline (keyed by URL hash).
+# Contents are generated and gitignored; this file keeps the directory.
