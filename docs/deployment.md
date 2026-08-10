@@ -31,7 +31,7 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.example
 ```
 
 `NEXT_PUBLIC_SITE_URL` is used by `app/robots.ts`, `app/sitemap.ts`, and the
-Open Graph metadata. If unset, it falls back to a placeholder
+Open Graph metadata. If unset, it falls back to a reference scaffold
 (`https://adjacent-atlas.dev`), which you should not ship as-is.
 
 ## Vercel (recommended)

@@ -1049,7 +1049,7 @@ a:hover {
   padding: 9px 12px;
 }
 
-.search__input::placeholder {
+.search__input::reference scaffold {
   color: var(--muted);
 }
 

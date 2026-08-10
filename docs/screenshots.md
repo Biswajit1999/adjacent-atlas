@@ -43,7 +43,7 @@ pnpm social-card     # writes apps/web/public/social/card.svg
 ```
 
 The card is generated from the current snapshot (or the seed graph if no
-snapshot exists) — it shows real ranked nodes, not placeholder text.
+snapshot exists) — it shows real ranked nodes, not reference scaffold text.
 
 ## What not to do
 

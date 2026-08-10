@@ -22,7 +22,7 @@ that the scene always has a textual equivalent.
 - **Semantics.** Landmarks (`header`/`main`/`footer`/`nav`), `aria-label`s on
   navigation and controls, `aria-current` on the active nav link, `aria-pressed`
   on toggles, and `VisuallyHidden` labels where a control is icon- or
-  placeholder-only.
+  reference scaffold-only.
 
 ## Known gaps
 

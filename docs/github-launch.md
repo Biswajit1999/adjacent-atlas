@@ -26,7 +26,7 @@ Set topics under the repo's *About* panel (gear icon).
 
 - Description: use the line above.
 - Website: your deployed URL (once live) — leave blank until then rather than
-  linking a placeholder.
+  linking a reference scaffold.
 - Topics: as above.
 
 ## Pre-launch checklist

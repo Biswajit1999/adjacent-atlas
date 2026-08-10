@@ -42,7 +42,7 @@ Reference locally-captured images with relative paths once they exist, e.g.:
 ![The atlas with a node selected](docs/images/atlas.png)
 ```
 
-Do not commit placeholder or stock images. The capture procedure is in
+Do not commit reference scaffold or stock images. The capture procedure is in
 `docs/screenshots.md`; a generated SVG social card is available via
 `pnpm.cmd social-card`.
 
