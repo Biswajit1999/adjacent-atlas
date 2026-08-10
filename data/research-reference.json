@@ -1,0 +1,29 @@
+{
+  "title": "Adjacent Atlas",
+  "description": "Research atlas for mapping the adjacent possible across code, scientific ideas, papers, instrumentation and project evolution.",
+  "equations": [
+    "Graph centrality",
+    "Diversity-weighted frontier score",
+    "Novelty = distance from known clusters"
+  ],
+  "references": [
+    "Kauffman, S.A., 2000. Investigations. Oxford University Press."
+  ],
+  "anchors": [
+    {
+      "x": 1,
+      "y": 0.2,
+      "label": "local frontier"
+    },
+    {
+      "x": 5,
+      "y": 0.65,
+      "label": "connected opportunity"
+    },
+    {
+      "x": 9,
+      "y": 0.88,
+      "label": "distant high-novelty node"
+    }
+  ]
+}

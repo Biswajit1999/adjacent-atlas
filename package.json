@@ -30,7 +30,8 @@
     "ingest:github": "tsx scripts/fetch-github.ts",
     "ingest:papers": "tsx scripts/fetch-papers.ts",
     "ingest:normalise": "tsx scripts/source-normalise.ts",
-    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,yml,yaml}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,yml,yaml}\"",
+    "validate:research": "node scripts/validate_repository.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
