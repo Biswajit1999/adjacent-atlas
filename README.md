@@ -107,7 +107,3 @@ Built and maintained by **Biswajit Jana** ([@Biswajit1999](https://github.com/Bi
 Released under the MIT License — see [`LICENSE`](./LICENSE). The seed `signals`
 values are illustrative scaffolding, not measured statistics; see
 [`docs/methodology.md`](./docs/methodology.md).
-
-## Research Quality Upgrade
-
-See [RESEARCH_QUALITY.md](RESEARCH_QUALITY.md) for the validation layer, reference anchors, equations and research boundaries added to this repository.
