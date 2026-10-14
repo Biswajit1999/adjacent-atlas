@@ -12,11 +12,15 @@ export const metadata: Metadata = {
   description:
     "An observatory for the adjacent possible: methods, instruments, and concepts close to the frontier of a research field, ranked from public code and literature signals.",
   metadataBase: new URL("https://adjacent-atlas.dev"),
+  alternates: { canonical: "https://adjacent-atlas.dev/" },
+  keywords: ["research frontier mapping", "research landscape", "literature signals", "open-source research", "scientific knowledge graph"],
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   openGraph: {
     title: "Adjacent Atlas",
     description:
       "Methods, instruments, and concepts close to the frontier of a research field, ranked from public signals.",
     type: "website",
+    url: "https://adjacent-atlas.dev/",
   },
   authors: [{ name: "Biswajit Jana", url: "https://github.com/Biswajit1999" }],
 };

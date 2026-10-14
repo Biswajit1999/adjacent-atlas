@@ -1,15 +1,10 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://adjacent-atlas.dev";
-
-const ROUTES = ["", "/atlas", "/briefs", "/method", "/about"] as const;
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-  return ROUTES.map((route) => ({
-    url: `${SITE_URL}${route}`,
-    lastModified,
-    changeFrequency: "weekly",
-    priority: route === "" ? 1 : 0.7,
+  const root = "https://adjacent-atlas.dev/";
+  return ["", "atlas/", "method/", "briefs/", "about/"].map((path, index) => ({
+    url: root + path, lastModified: new Date("2026-10-14"), changeFrequency: "monthly" as const, priority: index === 0 ? 1 : 0.7,
   }));
 }
