@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adjacent Atlas — Research-Frontier Mapping Software</title>
+  <meta name="description" content="Adjacent Atlas is open research software that maps nearby research opportunities from public code and literature signals, with a transparent scoring model and an EPRV instrumentation reference graph.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <link rel="canonical" href="https://biswajit1999.github.io/adjacent-atlas/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Adjacent Atlas — Research-Frontier Mapping Software">
+  <meta property="og:description" content="A transparent, source-linked atlas for exploring the adjacent possible in scientific research.">
+  <meta property="og:url" content="https://biswajit1999.github.io/adjacent-atlas/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Adjacent Atlas",
+    "description": "Research-frontier mapping software that ranks methods, instruments and concepts using public code and literature signals.",
+    "url": "https://biswajit1999.github.io/adjacent-atlas/",
+    "codeRepository": "https://github.com/Biswajit1999/adjacent-atlas",
+    "programmingLanguage": ["TypeScript", "JavaScript"],
+    "author": {"@type": "Person", "name": "Biswajit Jana", "url": "https://github.com/Biswajit1999"},
+    "license": "https://opensource.org/license/mit"
+  }
+  </script>
+  <style>
+    :root{color-scheme:dark;--bg:#07100f;--panel:#0d1917;--line:#294039;--ink:#eef5ec;--muted:#aab9b3;--mint:#86e6c4;--gold:#e9c56a}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 0,#17352c 0,transparent 34%),var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}a{color:inherit}.shell{width:min(1100px,calc(100% - 36px));margin:auto}nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}nav a{text-decoration:none;font-weight:750}.hero{padding:90px 0 66px;display:grid;grid-template-columns:1.35fr .65fr;gap:42px;align-items:end}.kicker{color:var(--mint);font:700 12px ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase}h1{margin:.25em 0;font:700 clamp(48px,8vw,96px)/.92 Georgia,serif;letter-spacing:-.05em}.lede{max-width:700px;color:var(--muted);font-size:20px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.button{display:inline-block;border:1px solid var(--mint);border-radius:999px;padding:11px 17px;text-decoration:none;font-weight:750}.button.primary{background:var(--mint);color:#052018}.readout{border:1px solid var(--line);background:linear-gradient(160deg,#10221e,#091412);border-radius:20px;padding:24px}.readout strong{display:block;color:var(--gold);font:650 18px ui-monospace,monospace}.readout span{color:var(--muted)}main{padding-bottom:80px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{border:1px solid var(--line);background:var(--panel);border-radius:17px;padding:23px}.card h2{margin:0 0 9px;font:650 24px Georgia,serif}.card p{margin:0;color:var(--muted)}.method{margin-top:54px;border-block:1px solid var(--line);padding:36px 0}.equation{font:600 clamp(15px,2.2vw,22px)/1.6 ui-monospace,monospace;color:var(--gold);overflow-wrap:anywhere}footer{padding:28px 0 45px;color:var(--muted);border-top:1px solid var(--line)}@media(max-width:760px){.hero,.grid{grid-template-columns:1fr}.hero{padding-top:58px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <nav><a href="./">Adjacent Atlas</a><a href="https://github.com/Biswajit1999/adjacent-atlas">Source code ↗</a></nav>
+    <header class="hero">
+      <div><p class="kicker">Open research software · v0.1.0</p><h1>Map what science can do next.</h1><p class="lede">Adjacent Atlas combines public code activity and literature signals to rank research methods, instruments and concepts near a field’s working frontier. The shipped reference graph focuses on extreme-precision radial-velocity instrumentation.</p><div class="actions"><a class="button primary" href="https://github.com/Biswajit1999/adjacent-atlas">Inspect the repository</a><a class="button" href="https://github.com/Biswajit1999/adjacent-atlas/blob/main/docs/scoring-model.md">Read the scoring model</a></div></div>
+      <aside class="readout" aria-label="Project status"><strong>fetch → normalise → score → snapshot → render</strong><p><span>Status:</span> early development. The engine and data schemas are usable; the live fetch pipeline remains the active edge.</p></aside>
+    </header>
+    <main>
+      <section class="grid" aria-label="System architecture"><article class="card"><h2>Evidence inputs</h2><p>Public code and literature signals are normalised into explicit, source-linked graph records.</p></article><article class="card"><h2>Transparent ranking</h2><p>Every adjacency score exposes its momentum, recency, connectivity, novelty and feasibility components.</p></article><article class="card"><h2>Scientific scope</h2><p>The reference atlas examines EPRV instrumentation; the schemas and engine are designed for additional domains.</p></article></section>
+      <section class="method"><p class="kicker">Current heuristic</p><p class="equation">adjacency = 100 × (0.30·momentum + 0.20·recency + 0.20·connectivity + 0.15·novelty + 0.15·feasibility)</p><p class="lede">This is an interpretable prioritisation heuristic—not a trained predictor and not a claim of scientific importance. Illustrative seed values are identified in the methodology documentation.</p></section>
+    </main>
+    <footer>Built and maintained by Biswajit Jana · MIT licensed · <a href="https://github.com/Biswajit1999/adjacent-atlas/tree/main/docs">Architecture and methodology</a></footer>
+  </div>
+</body>
+</html>
